@@ -1,0 +1,19 @@
+services:
+  keycloak:
+    image: bitnami/keycloak:24.0.5
+    container_name: keycloak
+    environment:
+      KEYCLOAK_CREATE_ADMIN_USER: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
+      KEYCLOAK_DATABASE_VENDOR: dev-mem
+      KEYCLOAK_EXTRA_ARGS: "--import-realm"
+    volumes:
+      - ./keycloak/import:/opt/bitnami/keycloak/data/import
+    ports:
+      - "8082:8080"
+    networks:
+      - keycloak-network
+
+networks:
+  keycloak-network:

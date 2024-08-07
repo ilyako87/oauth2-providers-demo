@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: oauth2-auth0-demo
+
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: ${OKTA_CLIENT_ID:okta-client-id}
+            client-secret: ${OKTA_CLIENT_SECRET:okta-client-secret}
+            scope: openid,profile,groups
+        provider:
+          auth0:
+            issuer-uri: https://${OKTA_DOMAIN}.us.auth0.com/
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework: INFO

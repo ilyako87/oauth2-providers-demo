@@ -1,0 +1,31 @@
+
+spring:
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          oauth2-demo-client:
+            require-authorization-consent: false
+            registration:
+                client-id: oauth2-demo-client
+                client-secret: "{noop}oauth2-demo-secret"
+                authorization-grant-types:
+                  - "authorization_code"
+                  - "refresh_token"
+                client-authentication-methods:
+                  - "client_secret_basic"
+                  - "client_secret_post"
+                redirect-uris:
+                  - "http://${OAUTH2_CLIENT_URL:localhost:8080}/login/oauth2/code/authorizationserver"
+                post-logout-redirect-uris:
+                  - "http://${OAUTH2_CLIENT_URL:localhost:8080}/logout"
+                  - "http://${OAUTH2_CLIENT_URL:localhost:8080}"
+                scopes:
+                    - "openid"
+                    - "profile"
+
+server:
+  port: 8081
+logging:
+  level:
+    org.springframework: INFO

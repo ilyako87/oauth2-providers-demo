@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: oauth2-keycloak-demo
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-name: Main OAuth2 Client
+            client-id: oauth2-demo-client
+            scope: openid, profile, email
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+        provider:
+          keycloak:
+            issuer-uri: http://${KEYCLOAK_HOST:localhost:8082}/realms/DEMO
+            user-name-attribute: preferred_username
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework: INFO
